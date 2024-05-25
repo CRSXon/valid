@@ -229,6 +229,7 @@ async function checkCache(request) {
     }
     response = new Response(response.body, response)
     response.headers.delete('Cache-Control')
+    response.headers.append('Content-Length', response.body.length)
     response.headers.append('X-Response-Time', Date.now() - now)
     return response
   }
