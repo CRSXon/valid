@@ -25,7 +25,7 @@ async function callAPI(request) {
       } else {
         return `{"success":false,"message":"Bad request"}`
       }
-      const body = `voucherPricePoint.id=259947&voucherPricePoint.price=15135.0&voucherPricePoint.variablePrice=0&user.userId=${id}&user.zoneId=${sv}&voucherTypeName=PUNISHING_GRAY_RAVEN&shopLang=id_ID`
+      const body = `voucherPricePoint.id=259947&voucherPricePoint.price=15136.0&voucherPricePoint.variablePrice=0&user.userId=${id}&user.zoneId=${sv}&voucherTypeName=PUNISHING_GRAY_RAVEN&shopLang=id_ID`
       const request = new Request(endpoint, {
         method: 'POST',
         headers: {
