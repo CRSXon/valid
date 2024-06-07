@@ -221,7 +221,7 @@ async function serveResult(request) {
   if (result.includes(`"undefined"`)) {
     result = `{"success":false,"message":"Cannot find nickname from your request."}`
   }
-  if (JSON.parse(JSON.parse(result)).success == false) {
+  if (result.success == false) {
     code = 400
   }
   result = result.replace(/\u002B/g, '%20')
