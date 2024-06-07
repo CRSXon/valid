@@ -10,7 +10,7 @@ async function callAPI(request) {
   const zone = params.get('zone')
   try {
     if (!id) {
-      return `{"success":false,"message":"Bad Request"}`
+      return {success:false,message:'Bad request',ret:'ab'}
     }
     if (path.includes('/pgr')) {
       if (zone.toLowerCase().includes('ap')) {
@@ -209,7 +209,7 @@ async function callAPI(request) {
     }
     else {
       // return `{"success":false,"message":"Bad request"}`
-      return { success: false, message: 'Bad request'}
+      return { success: false, message: 'Bad request', ret: 'ab'}
     }
   }
   catch (error) {
@@ -224,6 +224,9 @@ async function serveResult(request) {
   /*if (result.includes(`"undefined"`)) {
     result = `{"success":false,"message":"Cannot find nickname from your request."}`
   }*/
+  if (result.ret === 'ab') {
+    result.ret = 'cd'
+  }
   if (result.success == false) {
     code = 400
   }
