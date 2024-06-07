@@ -165,7 +165,8 @@ async function callAPI(request) {
       })
       const response = await fetch(request)
       const data = await response.json()
-      return `{"success":true,"game":"Garena Free Fire","id":${id},"name":"${data.confirmationFields.roles[0].role}"}`
+      // return `{"success":true,"game":"Garena Free Fire","id":${id},"name":"${data.confirmationFields.roles[0].role}"}`
+      return { success: true, game: 'Garena Free Fire', id: id, name: data.confirmationFields.roles[0].role }
     }
     if (path.includes('/cod')) {
       const body = `voucherPricePoint.id=46114&voucherPricePoint.price=5000.0&voucherPricePoint.variablePrice=0&user.userId=${id}&voucherTypeName=CALL_OF_DUTY&shopLang=id_ID&voucherTypeId=1&gvtId=1`
@@ -207,31 +208,33 @@ async function callAPI(request) {
       return `{"success":true,"game":"Super Sus","id":${id},"name":"${data.confirmationFields.username}"}`
     }
     else {
-      return `{"success":false,"message":"Bad request"}`
+      // return `{"success":false,"message":"Bad request"}`
+      return { success: false, message: 'Bad request'}
     }
   }
   catch (error) {
-    return `{"success":false,"message":"Cannot find nickname from your request."}`
+    //return `{"success":false,"message":"Cannot find nickname from your request."}`
+    return { success: false, message: 'Not found'}
   }
 }
 async function serveResult(request) {
   let dc = new URL(request.url).searchParams.get('decode')
   let code = 200
   let result = await callAPI(request)
-  if (result.includes(`"undefined"`)) {
+  /*if (result.includes(`"undefined"`)) {
     result = `{"success":false,"message":"Cannot find nickname from your request."}`
-  }
-  if (JSON.parse(JSON.stringify(result)).success == false) {
+  }*/
+  if (result.success == false) {
     code = 400
   }
-  result = result.replace(/\u002B/g, '%20')
+  /*result = result.replace(/\u002B/g, '%20')
   if (dc == false) {
     result = result
   }
   if (!dc || dc == true) {
     result = decodeURIComponent(result)
-  }
-  let response = new Response(result, {
+  }*/
+  let response = new Response(JSON.stringify(result), {
     status: code,
     headers: {
       'Access-Control-Allow-Origin': '*',
