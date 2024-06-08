@@ -234,7 +234,7 @@ async function serveResult(request) {
   if (result.success == false) {
     code = 400
   }
-  result.name = result.name.replace(/\u002B/g, '%20')
+  result.name = replace(/\u002B/g, '%20')
   if (dc == false) {
     result = result
   }
