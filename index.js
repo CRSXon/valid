@@ -228,7 +228,7 @@ async function serveResult(request) {
   let dc = new URL(request.url).searchParams.get('decode')
   let code = 200
   let result = await callAPI(request)
-  if (result.name.includes(`undefined`)) {
+  if (result.name = undefined) {
     result = {success:false,message:"Not found"}
   }
   if (result.success == false) {
